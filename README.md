@@ -1,5 +1,6 @@
 # movie-fleur 🌻
 [![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
+[![CircleCI](https://circleci.com/gh/Wetwer/movie-fleur/tree/master.svg?style=svg)](https://circleci.com/gh/Wetwer/movie-fleur/tree/master)
 
 Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red (Blue/Cyan/Green) Glasses
 
