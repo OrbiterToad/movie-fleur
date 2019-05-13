@@ -136,7 +136,7 @@ public class ImageHelper {
      *
      * @return gray img with no colors
      */
-    public static BufferedImage grayScale(BufferedImage bufferedImage) {
+    public static BufferedImage grayscale(BufferedImage bufferedImage) {
         ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
         ColorConvertOp op = new ColorConvertOp(cs, null);
         return op.filter(bufferedImage, null);

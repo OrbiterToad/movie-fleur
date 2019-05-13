@@ -31,6 +31,9 @@ videoConverterFromVideo.convert(framePosition);
 #### 3. Combine Frames to one image
 <img src="https://i.imgur.com/lFv7n8y.jpg" width="50%">
 
+#### (4.) Apply Grayscale to images
+<img src="https://i.imgur.com/As5drlk.png" width="50%">
+
 ### TODO
     - 3D heightmap
     - grayscale -> color filter
