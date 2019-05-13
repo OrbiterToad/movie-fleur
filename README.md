@@ -1,4 +1,4 @@
-# movie-fleur
+# movie-fleur 🌻
 
 Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red (Blue/Cyan/Green) Glasses
 
@@ -20,15 +20,15 @@ videoConverterFromVideo.convert(framePosition);
 ```
 
 
-#### Extracted frames
+#### 1. Extract frames from video file
 <img src="https://i.imgur.com/ODNFPZ6.jpg" width="50%">
 
-#### Frames split and stretched
+#### 2. Split and stretch frames
 <img src="https://i.imgur.com/S2jKdVA.jpg" width="49%">
 <img src="https://i.imgur.com/krLVxOF.jpg" width="49%">
 (left/right)
 
-#### Frames combined to one image
+#### 3. Combine Frames to one image
 <img src="https://i.imgur.com/lFv7n8y.jpg" width="50%">
 
 ### TODO
