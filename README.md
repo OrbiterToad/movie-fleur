@@ -1,4 +1,5 @@
 # movie-fleur 🌻
+[![emoji-log](https://cdn.rawgit.com/ahmadawais/stuff/ca97874/emoji-log/flat-round.svg)](https://github.com/ahmadawais/Emoji-Log/)
 
 Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red (Blue/Cyan/Green) Glasses
 
@@ -23,9 +24,14 @@ videoConverterFromVideo.convert(framePosition);
 #### 1. Extract frames from video file
 <img src="https://i.imgur.com/ODNFPZ6.jpg" width="50%">
 
-#### 2. Split and stretch frames
+#### 2a. Split and stretch frames
 <img src="https://i.imgur.com/S2jKdVA.jpg" width="49%">
 <img src="https://i.imgur.com/krLVxOF.jpg" width="49%">
+(left/right)
+
+#### 2b. Apply color filter
+<img src="https://i.imgur.com/YKJuLNS.png" width="49%">
+<img src="https://i.imgur.com/MAH4bVm.png" width="49%">
 (left/right)
 
 #### 3. Combine Frames to one image
@@ -33,8 +39,3 @@ videoConverterFromVideo.convert(framePosition);
 
 #### (4.) Apply Grayscale to images
 <img src="https://i.imgur.com/As5drlk.png" width="50%">
-
-### TODO
-    - 3D heightmap
-    - grayscale -> color filter
-    - commandline application

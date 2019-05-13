@@ -141,4 +141,33 @@ public class ImageHelper {
         ColorConvertOp op = new ColorConvertOp(cs, null);
         return op.filter(bufferedImage, null);
     }
+
+    public static BufferedImage filter(BufferedImage originalImage, FilterColor filterColor) {
+        switch (filterColor) {
+            case RED:
+                return createColorImage(originalImage, 0xFFFF0000);
+            case GREEN:
+                return createColorImage(originalImage, 0xFF00FF00);
+            case BLUE:
+                return createColorImage(originalImage, 0xFF0000FF);
+            default:
+                return originalImage;
+        }
+    }
+
+    private static BufferedImage createColorImage(BufferedImage originalImage, int mask) {
+        BufferedImage colorImage = new BufferedImage(originalImage.getWidth(),
+                originalImage.getHeight(), originalImage.getType());
+
+        for (int x = 0; x < originalImage.getWidth(); x++) {
+            for (int y = 0; y < originalImage.getHeight(); y++) {
+                int pixel = originalImage.getRGB(x, y) & mask;
+                colorImage.setRGB(x, y, pixel);
+            }
+        }
+
+        return colorImage;
+    }
+
+
 }
