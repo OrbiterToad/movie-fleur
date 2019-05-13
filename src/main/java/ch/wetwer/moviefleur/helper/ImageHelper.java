@@ -35,7 +35,7 @@ public class ImageHelper {
 
     /**
      * @param bufferedImg img to be made transparent
-     * @param alpha alpha value to apply to img (TYPE_INT_ARGB)
+     * @param alpha       alpha value to apply to img (TYPE_INT_ARGB)
      *
      * @return Transparent BufferedImg
      */
@@ -97,11 +97,18 @@ public class ImageHelper {
      * @param imgFrameLeft  will be the img in the background with color red for left
      * @param imgFrameRight will be the img in the foreground with color blue for right and a transparency of 0.7
      *
+     * @return
+     *
      * @throws IOException
      */
-    public static void combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) throws IOException {
+    public static BufferedImage combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) throws IOException {
+
+        File outFile = new File(outDir + "frame_combined.png");
+
         ImageIO.write(getCombined(imgFrameLeft, imgFrameRight), "png",
                 new File(outDir + "frame_combined.png"));
+
+        return ImageIO.read(outFile);
     }
 
     /**
@@ -111,9 +118,10 @@ public class ImageHelper {
      *
      * @throws IOException
      */
-    public static void combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight, int framePosition) throws IOException {
-        ImageIO.write(getCombined(imgFrameLeft, imgFrameRight), "png",
-                new File(outDir + "frame_" + framePosition + "_combined.png"));
+    public static BufferedImage combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight, int framePosition) throws IOException {
+        File outFile = new File(outDir + "frame_" + framePosition + "_combined.png");
+        ImageIO.write(getCombined(imgFrameLeft, imgFrameRight), "png", outFile);
+        return ImageIO.read(outFile);
     }
 
     /**
@@ -144,7 +152,7 @@ public class ImageHelper {
 
     /**
      * @param originalImg img to be filtered
-     * @param filterColor   color to be applied
+     * @param filterColor color to be applied
      *
      * @return filtered img with given color
      */
