@@ -4,9 +4,7 @@ import ch.wetwer.moviefleur.model.VideoFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Java2DFrameConverter;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +36,7 @@ public class VideoHelper {
             frameGrabber.start();
             frameGrabber.setFrameNumber(framePosition);
             BufferedImage extractedFrame = converter.convert(frameGrabber.grab());
-            ImageIO.write(extractedFrame, "png",
-                    new File(outDir + "frame_" + framePosition + "_default.png"));
+            ImageHelper.saveImage(extractedFrame, outDir + "frame_" + framePosition + "_default.png");
             frameGrabber.stop();
             return extractedFrame;
         } catch (IOException e) {

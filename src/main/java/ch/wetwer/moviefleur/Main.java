@@ -13,7 +13,7 @@ public class Main {
 //        videoConverterFromImg.convertFromImg(new File("img/frame_default.png"));
 
         VideoBuilder videoBuilder = VideoBuilder.builder().inputFile("3dVideo.mp4").build();
-        VideoConverter videoConverterFromVideo = new VideoConverter(videoBuilder);
+        VideoConverter videoConverterFromVideo = new VideoConverter(videoBuilder, "img");
         videoConverterFromVideo.convert(6000);
     }
 

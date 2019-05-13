@@ -85,12 +85,12 @@ public class ImageHelper {
      * @throws IOException
      */
     private static List<BufferedImage> getSplit(BufferedImage frameDefault, File imgFrameLeft, File imgFrameRight) throws IOException {
-        ImageIO.write(stretch(frameDefault.getSubimage(0, 0,
-                frameDefault.getWidth() / 2, frameDefault.getHeight())), "png", imgFrameLeft);
-        ImageIO.write(stretch(frameDefault.getSubimage(frameDefault.getWidth() / 2, 0,
-                frameDefault.getWidth() / 2, frameDefault.getHeight())), "png", imgFrameRight);
+        BufferedImage splitLeft = stretch(frameDefault.getSubimage(0, 0,
+                frameDefault.getWidth() / 2, frameDefault.getHeight()));
+        BufferedImage splitRight = stretch(frameDefault.getSubimage(frameDefault.getWidth() / 2, 0,
+                frameDefault.getWidth() / 2, frameDefault.getHeight()));
 
-        return Arrays.asList(ImageIO.read(imgFrameLeft), ImageIO.read(imgFrameRight));
+        return Arrays.asList(saveImage(splitLeft, imgFrameLeft), saveImage(splitRight, imgFrameRight));
     }
 
     /**
@@ -102,13 +102,8 @@ public class ImageHelper {
      * @throws IOException
      */
     public static BufferedImage combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) throws IOException {
-
-        File outFile = new File(outDir + "frame_combined.png");
-
-        ImageIO.write(getCombined(imgFrameLeft, imgFrameRight), "png",
-                new File(outDir + "frame_combined.png"));
-
-        return ImageIO.read(outFile);
+        BufferedImage combinedImage = getCombined(imgFrameLeft, imgFrameRight);
+        return saveImage(combinedImage, outDir + "frame_combined.png");
     }
 
     /**
@@ -119,9 +114,9 @@ public class ImageHelper {
      * @throws IOException
      */
     public static BufferedImage combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight, int framePosition) throws IOException {
-        File outFile = new File(outDir + "frame_" + framePosition + "_combined.png");
-        ImageIO.write(getCombined(imgFrameLeft, imgFrameRight), "png", outFile);
-        return ImageIO.read(outFile);
+        BufferedImage combinedImage = getCombined(imgFrameLeft, imgFrameRight);
+
+        return saveImage(combinedImage, outDir + "frame_" + framePosition + "_combined.png");
     }
 
     /**
@@ -131,7 +126,9 @@ public class ImageHelper {
      * @return
      */
     private static BufferedImage getCombined(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) {
-        BufferedImage combined = new BufferedImage(imgFrameLeft.getWidth(), imgFrameLeft.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        BufferedImage combined
+                = new BufferedImage(imgFrameLeft.getWidth(), imgFrameLeft.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
         Graphics g = combined.getGraphics();
         g.drawImage(imgFrameLeft, 0, 0, null);
@@ -168,6 +165,31 @@ public class ImageHelper {
         }
 
         return colorImage;
+    }
+
+    /**
+     * @param bufferedImage Img to be saved to the disk
+     * @param outFile       Title of file to be saved
+     *
+     * @return BufferedImage object as reference
+     *
+     * @throws IOException
+     */
+    public static BufferedImage saveImage(BufferedImage bufferedImage, String outFile) throws IOException {
+        return saveImage(bufferedImage, new File(outFile));
+    }
+
+    /**
+     * @param bufferedImage Img to be saved to the disk
+     * @param outFile       Output file as object
+     *
+     * @return BufferedImage object as reference
+     *
+     * @throws IOException
+     */
+    public static BufferedImage saveImage(BufferedImage bufferedImage, File outFile) throws IOException {
+        ImageIO.write(bufferedImage, "png", outFile);
+        return bufferedImage;
     }
 
 }
