@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author Wetwer
  * @project score-fleur
- * @package ch.wetwer.scorefleur
+ * @package ch.wetwer.moviefleur
  * @created 13.05.2019
  **/
 public class VideoHelper {

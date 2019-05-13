@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * @author Wetwer
  * @project score-fleur
- * @package ch.wetwer.scorefleur
+ * @package ch.wetwer.moviefleur
  * @created 08.05.2019
  **/
 
