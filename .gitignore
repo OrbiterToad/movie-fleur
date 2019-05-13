@@ -87,7 +87,7 @@ fabric.properties
 
 .gitignore
 .idea/
-Test3D.mp4
+3dVideo.mp4
 movie-fleur.iml
 src/main/resources/
 src/test/
