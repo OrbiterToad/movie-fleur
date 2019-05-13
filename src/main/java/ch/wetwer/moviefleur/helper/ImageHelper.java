@@ -34,16 +34,16 @@ public class ImageHelper {
     }
 
     /**
-     * @param image img to be made transparent
+     * @param bufferedImg img to be made transparent
      * @param alpha alpha value to apply to img (TYPE_INT_ARGB)
      *
-     * @return Transparent BufferedImage
+     * @return Transparent BufferedImg
      */
-    public static BufferedImage transparent(BufferedImage image, double alpha) {
-        BufferedImage target = new BufferedImage(image.getWidth(), image.getHeight(), java.awt.Transparency.TRANSLUCENT);
+    public static BufferedImage transparent(BufferedImage bufferedImg, double alpha) {
+        BufferedImage target = new BufferedImage(bufferedImg.getWidth(), bufferedImg.getHeight(), java.awt.Transparency.TRANSLUCENT);
         Graphics2D g = target.createGraphics();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha));
-        g.drawImage(image, null, 0, 0);
+        g.drawImage(bufferedImg, null, 0, 0);
         g.dispose();
         return target;
     }
@@ -77,8 +77,8 @@ public class ImageHelper {
 
     /**
      * @param frameDefault  VideoFrame shown as in default video
-     * @param imgFrameLeft  Image of frame on left side
-     * @param imgFrameRight Image of frame on left side
+     * @param imgFrameLeft  Img of frame on left side
+     * @param imgFrameRight Img of frame on left side
      *
      * @return list with leftFrame at [0] and rightFrame at [1]
      *
@@ -132,42 +132,34 @@ public class ImageHelper {
     }
 
     /**
-     * @param bufferedImage img to be converted to color scale CS_GRAY
+     * @param bufferedImg img to be converted to color scale CS_GRAY
      *
      * @return gray img with no colors
      */
-    public static BufferedImage grayscale(BufferedImage bufferedImage) {
+    public static BufferedImage filterGrayscale(BufferedImage bufferedImg) {
         ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
         ColorConvertOp op = new ColorConvertOp(cs, null);
-        return op.filter(bufferedImage, null);
+        return op.filter(bufferedImg, null);
     }
 
-    public static BufferedImage filter(BufferedImage originalImage, FilterColor filterColor) {
-        switch (filterColor) {
-            case RED:
-                return createColorImage(originalImage, 0xFFFF0000);
-            case GREEN:
-                return createColorImage(originalImage, 0xFF00FF00);
-            case BLUE:
-                return createColorImage(originalImage, 0xFF0000FF);
-            default:
-                return originalImage;
-        }
-    }
+    /**
+     * @param originalImg img to be filtered
+     * @param filterColor   color to be applied
+     *
+     * @return filtered img with given color
+     */
+    public static BufferedImage filterColor(BufferedImage originalImg, FilterColor filterColor) {
+        BufferedImage colorImage = new BufferedImage(originalImg.getWidth(),
+                originalImg.getHeight(), originalImg.getType());
 
-    private static BufferedImage createColorImage(BufferedImage originalImage, int mask) {
-        BufferedImage colorImage = new BufferedImage(originalImage.getWidth(),
-                originalImage.getHeight(), originalImage.getType());
-
-        for (int x = 0; x < originalImage.getWidth(); x++) {
-            for (int y = 0; y < originalImage.getHeight(); y++) {
-                int pixel = originalImage.getRGB(x, y) & mask;
-                colorImage.setRGB(x, y, pixel);
+        for (int pixelX = 0; pixelX < originalImg.getWidth(); pixelX++) {
+            for (int pixelY = 0; pixelY < originalImg.getHeight(); pixelY++) {
+                int pixel = originalImg.getRGB(pixelX, pixelY) & filterColor.getMask();
+                colorImage.setRGB(pixelX, pixelY, pixel);
             }
         }
 
         return colorImage;
     }
-
 
 }

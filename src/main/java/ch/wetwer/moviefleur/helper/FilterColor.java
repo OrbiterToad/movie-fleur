@@ -8,8 +8,17 @@ package ch.wetwer.moviefleur.helper;
  **/
 public enum FilterColor {
 
-    BLUE,
-    RED,
-    GREEN
+    BLUE(0xFFFF0000),
+    RED(0xFF00FF00),
+    GREEN(0xFF0000FF);
 
+    private int mask;
+
+    FilterColor(int mask) {
+        this.mask = mask;
+    }
+
+    public int getMask() {
+        return mask;
+    }
 }

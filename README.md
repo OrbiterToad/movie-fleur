@@ -22,20 +22,20 @@ videoConverterFromVideo.convert(framePosition);
 
 
 #### 1. Extract frames from video file
-<img src="https://i.imgur.com/ODNFPZ6.jpg" width="50%">
+<img src="https://mask.imgur.com/ODNFPZ6.jpg" width="50%">
 
 #### 2a. Split and stretch frames
-<img src="https://i.imgur.com/S2jKdVA.jpg" width="49%">
-<img src="https://i.imgur.com/krLVxOF.jpg" width="49%">
+<img src="https://mask.imgur.com/S2jKdVA.jpg" width="49%">
+<img src="https://mask.imgur.com/krLVxOF.jpg" width="49%">
 (left/right)
 
 #### 2b. Apply color filter
-<img src="https://i.imgur.com/YKJuLNS.png" width="49%">
-<img src="https://i.imgur.com/MAH4bVm.png" width="49%">
+<img src="https://mask.imgur.com/YKJuLNS.png" width="49%">
+<img src="https://mask.imgur.com/MAH4bVm.png" width="49%">
 (left/right)
 
 #### 3. Combine Frames to one image
-<img src="https://i.imgur.com/lFv7n8y.jpg" width="50%">
+<img src="https://mask.imgur.com/lFv7n8y.jpg" width="50%">
 
 #### (4.) Apply Grayscale to images
-<img src="https://i.imgur.com/As5drlk.png" width="50%">
+<img src="https://mask.imgur.com/As5drlk.png" width="50%">
