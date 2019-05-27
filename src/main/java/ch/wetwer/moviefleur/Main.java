@@ -1,6 +1,14 @@
 package ch.wetwer.moviefleur;
 
-import java.io.File;
+import ch.wetwer.moviefleur.helper.AdditiveCombiner;
+import ch.wetwer.moviefleur.helper.ColorFilter;
+import ch.wetwer.moviefleur.helper.ColorMask;
+import ch.wetwer.moviefleur.helper.ImageHelper;
+import ch.wetwer.moviefleur.helper.ImageSplitter;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Wetwer
@@ -10,13 +18,15 @@ import java.io.File;
  **/
 public class Main {
 
-    public static void main(String[] args) {
-        VideoConverter videoConverterFromImg = new VideoConverter("img");
-        videoConverterFromImg.convertFromImg(new File("img/frame_default.png"));
-
+    public static void main(String[] args) throws IOException {
         VideoBuilder videoBuilder = VideoBuilder.builder().inputFile("3dVideo.mp4").build();
-        VideoConverter videoConverterFromVideo = new VideoConverter(videoBuilder, "img");
-        videoConverterFromVideo.convert(6000);
-    }
 
+        BufferedImage frame = new VideoConverter(videoBuilder).getFrame(6000);
+        List<BufferedImage> splited = ImageSplitter.split(frame);
+        BufferedImage frameCombined = AdditiveCombiner.combine(
+                ColorFilter.filterColor(splited.get(0), ColorMask.RED),
+                ColorFilter.filterColor(splited.get(1), ColorMask.GREEN_BLUE));
+
+        ImageHelper.saveImage(frameCombined, "frame_combined.png");
+    }
 }

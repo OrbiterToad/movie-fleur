@@ -6,15 +6,16 @@ package ch.wetwer.moviefleur.helper;
  * @package ch.wetwer.moviefleur.helper
  * @created 13.05.2019
  **/
-public enum FilterColor {
+public enum ColorMask {
 
     RED(0xFFFF0000),
     GREEN(0xFF00FF00),
-    BLUE(0xFF0000FF);
+    BLUE(0xFF0000FF),
+    GREEN_BLUE(0xFF00FFFF);
 
     private int mask;
 
-    FilterColor(int mask) {
+    ColorMask(int mask) {
         this.mask = mask;
     }
 

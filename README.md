@@ -14,11 +14,15 @@ videoConverterFromImg.convertFromImg(new File("img/frame_default.png"));
 ### Convert from video file with given framePosition
 If a 3D video is available the frames can be extracted from the Video by applying the frame Position. 3D video Files can be found here: <a href="https://yts.am/browse-movies/0/3D/all/0/downloads">YTS</a>
 ```java
-//Build with VideoBuilder
 VideoBuilder videoBuilder = VideoBuilder.builder().inputFile("3dVideo.mp4").build();
-VideoConverter videoConverterFromVideo = new VideoConverter(videoBuilder, "img");
-//Start converting
-videoConverterFromVideo.convert(framePosition);
+
+BufferedImage frame = new VideoConverter(videoBuilder).getFrame(6000);
+List<BufferedImage> splited = ImageSplitter.split(frame);
+BufferedImage frameCombined = AdditiveCombiner.combine(
+        ColorFilter.colorMask(splited.get(0), FilterColor.RED),
+        ColorFilter.colorMask(splited.get(1), FilterColor.GREEN_BLUE));
+
+ImageHelper.saveImage(frameCombined, "frame_combined.png");
 ```
 
 
@@ -40,3 +44,6 @@ videoConverterFromVideo.convert(framePosition);
 
 #### (4.) Apply Grayscale to images
 <img src="https://mask.imgur.com/As5drlk.png" width="50%">
+
+#### 5. Combined with filter
+<img src="https://i.imgur.com/hgqPHa2.jpg" width="50%">

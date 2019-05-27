@@ -12,41 +12,39 @@ import java.awt.image.BufferedImage;
 public class AdditiveCombiner {
 
     /**
-     * Not Working yet
-     *
      * @param imgFrameLeft  will be the img for the left eye
      * @param imgFrameRight will be the img for the right eye
      *
-     * @return
+     * @return a combined image with additive color filtering
      */
-    public BufferedImage getCombined(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) {
+    public static BufferedImage combine(BufferedImage imgFrameLeft, BufferedImage imgFrameRight) {
 
         BufferedImage combined
                 = new BufferedImage(imgFrameLeft.getWidth(), imgFrameLeft.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        for (int pixelX = 0; pixelX < imgFrameLeft.getWidth(); pixelX++) {
-            for (int pixelY = 0; pixelY < imgFrameLeft.getHeight(); pixelY++) {
-                Color pixelLeft = new Color(imgFrameLeft.getRGB(pixelX, pixelY));
-                System.out.print(pixelLeft.getRed());
-                System.out.print(pixelLeft.getGreen());
-                System.out.println(pixelLeft.getBlue());
-
-                Color pixelRight = new Color(imgFrameRight.getRGB(pixelX, pixelY));
-                System.out.print(pixelRight.getRed());
-                System.out.print(pixelRight.getGreen());
-                System.out.println(pixelRight.getBlue());
-
-
-//                combined.setRGB(pixelX, pixelY,);
-                return null;
+        for (int x = 0; x < imgFrameLeft.getWidth(); x++) {
+            for (int y = 0; y < imgFrameLeft.getHeight(); y++) {
+                combined.setRGB(x, y, additive(imgFrameLeft.getRGB(x, y), imgFrameRight.getRGB(x, y)));
             }
-            return null;
         }
         return combined;
     }
 
-    private static int additive(int pixelLeft, int pixelRight) {
-        return 0;
+    /**
+     * @param pixelLeft  Pixel for Red Colors
+     * @param pixelRight Pixel for Green and Blue Colors
+     *
+     * @return the combined rgb-int value of both images
+     */
+    public static int additive(int pixelLeft, int pixelRight) {
+        Color left = new Color(pixelLeft);
+        Color right = new Color(pixelRight);
+
+        int rgb = left.getRed();
+        rgb = (rgb << 8) + right.getGreen();
+        rgb = (rgb << 8) + right.getBlue();
+
+        return rgb;
     }
 
 
