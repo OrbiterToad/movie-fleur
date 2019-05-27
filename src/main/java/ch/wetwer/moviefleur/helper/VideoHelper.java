@@ -17,12 +17,6 @@ import java.util.List;
  **/
 public class VideoHelper {
 
-    private String outDir;
-
-    public VideoHelper(String outDir) {
-        this.outDir = outDir;
-    }
-
     /**
      * @param file          video file to extract 3d frame
      * @param framePosition position of frame to be extracted from video file
@@ -36,7 +30,6 @@ public class VideoHelper {
             frameGrabber.start();
             frameGrabber.setFrameNumber(framePosition);
             BufferedImage extractedFrame = converter.convert(frameGrabber.grab());
-            ImageHelper.saveImage(extractedFrame, outDir + "frame_" + framePosition + "_default.png");
             frameGrabber.stop();
             return extractedFrame;
         } catch (IOException e) {
