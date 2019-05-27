@@ -1,10 +1,10 @@
 package ch.wetwer.moviefleur.helper;
 
-import ch.wetwer.moviefleur.model.VideoFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Java2DFrameConverter;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @package ch.wetwer.moviefleur
  * @created 13.05.2019
  **/
-public class VideoHelper {
+public class VideoExtractor {
 
     /**
      * @param file          video file to extract 3d frame
@@ -23,7 +23,7 @@ public class VideoHelper {
      *
      * @return img file of
      */
-    public BufferedImage extractFrame(String file, int framePosition) {
+    public BufferedImage extractFrame(File file, int framePosition) {
         try {
             Java2DFrameConverter converter = new Java2DFrameConverter();
             FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(file);
@@ -42,24 +42,19 @@ public class VideoHelper {
      * @param file video file to extract 3d frames
      *
      * @return list of frames
-     *
-     * TODO: NOT WORKING CURRENTLY
      */
-    public List<VideoFrame> extractAll(String file) {
+    public List<BufferedImage> extractAll(File file) {
         try {
-            Java2DFrameConverter java2DFrameConverter = new Java2DFrameConverter();
             FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(file);
             frameGrabber.start();
 
-            ArrayList<VideoFrame> extractedFrames = new ArrayList<>();
-
-            for (int currentFrame = 11; currentFrame <= frameGrabber.getLengthInFrames();
-                 currentFrame = currentFrame + 10000) {
-                System.out.println(frameGrabber.getLengthInFrames());
-                System.out.println(currentFrame);
-                frameGrabber.setFrameNumber(currentFrame);
-                BufferedImage bufferedImage = java2DFrameConverter.convert(frameGrabber.grab());
-                extractedFrames.add(new VideoFrame(bufferedImage, currentFrame));
+            ArrayList<BufferedImage> extractedFrames = new ArrayList<>();
+            //frameGrabber.getFrameNumber()
+            for (int frame = 6100; frame <= 6120; frame = frame + 1) {
+                System.out.println(frame);
+                frameGrabber.setFrameNumber(frame);
+                BufferedImage bufferedImage = new Java2DFrameConverter().convert(frameGrabber.grab());
+                extractedFrames.add(bufferedImage);
             }
             frameGrabber.stop();
             return extractedFrames;
