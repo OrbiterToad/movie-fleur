@@ -107,48 +107,136 @@ BufferedImage additiveCombinedFrame = AdditiveCombiner.combine(
 );
 ```
 
-#### Apply Grayscale to images
+### 6. Compile to Video
+<img src="https://github.com/Wetwer/movie-fleur/blob/master/img/gif_default.gif?raw=true" width="50%">
 
-<table>
-<tr>
-<th>Default</th>
-<th>Indexed</th>
-<th>Gray</th>
-<th>Binary</th>
-</tr>
-<tr>
-<td>
-<img src="https://i.imgur.com/ZcNK1s2.jpg">
-</td>
-<td>
-<img src="https://i.imgur.com/dBI2ZFI.png">
-</td>
-<td>
-<img src="https://i.imgur.com/C6A2pMO.jpg">
-</td>
-<td>
-<img src="https://i.imgur.com/FyijEmt.png">
-</td>
-</tr>
+```java
+// Extract images from Video (specific from frames 6000 - 6200)
+List<BufferedImage> frames = new VideoExtractor()
+        .extractAll(new File("3dVideo.mp4"), 6000, 6200);
+        
+List<BufferedImage> videoImages = new ArrayList<>();
 
-<tr>
-<th>Green</th>
-<th>Blue</th>
-<th>Transparent (0.5)</th>
-<th>Invert</th>
-</tr>
-<tr>
-<td>
-<img src="https://i.imgur.com/3HPSel1.png">
-</td>
-<td>
-<img src="https://i.imgur.com/lXIyDEm.jpg">
-</td>
-<td>
-<img src="https://i.imgur.com/zMNBL6G.jpg">
-</td>
-<td>
-<img src="https://i.imgur.com/RXWopYs.jpg">
-</td>
-</tr>
-</table>
+// For every extracted img apply filters
+for (BufferedImage frame : frames) {
+        List<BufferedImage> splits = ImageSplitter.split(frame);
+        videoImages.add(AdditiveCombiner.combine(
+            ColorFilter.filterColor(splits.get(0), ColorMask.RED),
+            ColorFilter.filterColor(splits.get(1), ColorMask.GREEN_BLUE)
+      ));
+}
+
+// Create Video from filtered frames
+new VideoCompiler().create(videoImages, "3dVideo.mp4");
+```
+
+#### Further Filters
+
+  <table>
+        <tr>
+            <th>Default</th>
+            <td>
+                <img src="https://i.imgur.com/ZcNK1s2.jpg" width="500px">
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Indexed</th>
+            <td>
+                <img src="https://i.imgur.com/dBI2ZFI.png" width="500px">
+            </td>
+            <td>
+               <pre>
+ImageHelper.convertToType(frame, BufferedImage.TYPE_BYTE_INDEXED)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Red</th>
+            <td>
+                <img src="https://mask.imgur.com/YKJuLNS.png" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.filterColor(frame, ColorMask.GREEN)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Green</th>
+            <td>
+                <img src="https://i.imgur.com/P84E62j.png" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.filterColor(frame, ColorMask.GREEN)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Blue</th>
+            <td>
+                <img src="https://i.imgur.com/lXIyDEm.jpg" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.filterColor(frame, ColorMask.BLUE)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Green & Blue</th>
+            <td>
+                <img src="https://i.imgur.com/hNGX1do.jpg" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.filterColor(frame, ColorMask.BLUE)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Gray</th>
+            <td>
+                <img src="https://i.imgur.com/C6A2pMO.jpg" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.filterGrayscale(frame)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Binary</th>
+            <td>
+                <img src="https://i.imgur.com/FyijEmt.png" width="500px">
+            </td>
+            <td>
+               <pre>
+ImageHelper.convertToType(frame, BufferedImage.TYPE_BYTE_BINARY)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Transparent (0.5)</th>
+            <td>
+                <img src="https://i.imgur.com/zMNBL6G.jpg" width="500px">
+            </td>
+            <td>
+               <pre>
+AlphaCombiner.transparent(frame, 0.5)
+               </pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Invert</th>
+            <td>
+                <img src="https://i.imgur.com/RXWopYs.jpg" width="500px">
+            </td>
+            <td>
+               <pre>
+ColorFilter.invert(frame)
+               </pre>
+            </td>
+        </tr>
+    </table>
