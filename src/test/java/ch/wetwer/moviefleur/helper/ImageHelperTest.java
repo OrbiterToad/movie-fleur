@@ -56,4 +56,17 @@ public class ImageHelperTest {
         // Run the test
         ImageHelper.saveImage(bufferedImage, outFile);
     }
+
+    @Test
+    public void testConvertToType() throws IOException {
+        // Setup
+        final BufferedImage sourceImage = ImageIO.read(new File("img/frame_default.png"));
+        final int type = BufferedImage.TYPE_3BYTE_BGR;
+
+        // Run the test
+        final BufferedImage result = ImageHelper.convertToType(sourceImage, type);
+
+        // Verify the results
+        assertEquals(type, result.getType());
+    }
 }

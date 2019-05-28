@@ -1,7 +1,5 @@
-package ch.wetwer.moviefleur.helper;
+package ch.wetwer.moviefleur.color;
 
-import ch.wetwer.moviefleur.color.ColorFilter;
-import ch.wetwer.moviefleur.color.ColorMask;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -42,5 +40,17 @@ public class ColorFilterTest {
         assertEquals(-16774912, resultGreen.getRGB(1, 1));
         assertEquals(-16777211, resultBlue.getRGB(1, 1));
         assertEquals(-16774907, resultGreenBlue.getRGB(1, 1));
+    }
+
+    @Test
+    public void testInvert() throws IOException {
+        // Setup
+        final BufferedImage image = ImageIO.read(new File("img/frame_default.png"));
+
+        // Run the test
+        final BufferedImage result = ColorFilter.invert(image);
+
+        // Verify the results
+        assertEquals(-723206, result.getRGB(1, 1));
     }
 }
