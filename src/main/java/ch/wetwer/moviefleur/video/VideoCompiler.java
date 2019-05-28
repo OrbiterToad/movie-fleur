@@ -1,5 +1,6 @@
 package ch.wetwer.moviefleur.video;
 
+import ch.wetwer.moviefleur.helper.ImageHelper;
 import com.xuggle.mediatool.IMediaWriter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.xuggler.ICodec;
@@ -27,36 +28,13 @@ public class VideoCompiler {
                 imageList.get(0).getWidth(), imageList.get(0).getHeight());
         long startTime = System.nanoTime();
         for (BufferedImage frame : imageList) {
-            writer.encodeVideo(0, convertToType(frame, BufferedImage.TYPE_3BYTE_BGR),
+            writer.encodeVideo(0, ImageHelper.convertToType(frame, BufferedImage.TYPE_3BYTE_BGR),
                     System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
             frame = null;
         }
 
         writer.close();
 
-    }
-
-    /**
-     * @param sourceImage image to convert
-     * @param type encoding type to convert to
-     *
-     * @return converted {@link BufferedImage} in given encoding
-     */
-    public static BufferedImage convertToType(BufferedImage sourceImage, int type) {
-
-        BufferedImage image;
-        // if the source image is already the target type, return the source image
-        if (sourceImage.getType() == type) {
-            image = sourceImage;
-        }
-
-        // otherwise create a new image of the target type and draw the new image
-        else {
-            image = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), type);
-            image.getGraphics().drawImage(sourceImage, 0, 0, null);
-        }
-
-        return image;
     }
 
 }

@@ -1,14 +1,9 @@
 package ch.wetwer.moviefleur.helper;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Wetwer
@@ -43,4 +38,21 @@ public class ImageHelper {
         return bufferedImage;
     }
 
+
+    /**
+     * @param sourceImage image to convert
+     * @param type        encoding type to convert to
+     *
+     * @return converted {@link BufferedImage} in given encoding
+     */
+    public static BufferedImage convertToType(BufferedImage sourceImage, int type) {
+
+        if (sourceImage.getType() == type) {
+            return sourceImage;
+        } else {
+            BufferedImage image = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), type);
+            image.getGraphics().drawImage(sourceImage, 0, 0, null);
+            return image;
+        }
+    }
 }

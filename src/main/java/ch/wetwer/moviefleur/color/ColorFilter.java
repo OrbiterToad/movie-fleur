@@ -1,5 +1,6 @@
 package ch.wetwer.moviefleur.color;
 
+import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -25,7 +26,7 @@ public class ColorFilter {
 
     /**
      * @param originalImg img to be filtered
-     * @param colorMask color to be applied
+     * @param colorMask   color to be applied
      *
      * @return filtered img with given color
      */
@@ -43,4 +44,18 @@ public class ColorFilter {
         return colorImage;
     }
 
+    public static BufferedImage invert(BufferedImage image) {
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int rgba = image.getRGB(x, y);
+                Color col = new Color(rgba, true);
+                col = new Color(255 - col.getRed(),
+                        255 - col.getGreen(),
+                        255 - col.getBlue());
+                image.setRGB(x, y, col.getRGB());
+            }
+        }
+
+        return image;
+    }
 }
