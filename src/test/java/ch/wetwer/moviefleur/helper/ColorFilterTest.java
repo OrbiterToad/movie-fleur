@@ -1,5 +1,7 @@
 package ch.wetwer.moviefleur.helper;
 
+import ch.wetwer.moviefleur.color.ColorFilter;
+import ch.wetwer.moviefleur.color.ColorMask;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;

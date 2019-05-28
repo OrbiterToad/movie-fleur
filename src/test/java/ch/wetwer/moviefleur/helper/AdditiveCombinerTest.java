@@ -23,7 +23,7 @@ public class AdditiveCombinerTest {
         final BufferedImage imgFrameRight = splits.get(1);
 
         // Run the test
-        final BufferedImage result = AlphaCombiner.combine(imgFrameLeft, imgFrameRight);
+        final BufferedImage result = AdditiveCombiner.combine(imgFrameLeft, imgFrameRight);
 
         // Verify the results
         assertEquals(imgFrameLeft.getWidth(), result.getWidth());
