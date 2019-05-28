@@ -108,11 +108,47 @@ BufferedImage additiveCombinedFrame = AdditiveCombiner.combine(
 ```
 
 #### Apply Grayscale to images
-<img src="https://mask.imgur.com/As5drlk.png" width="50%">
-<p>
-    Not very usefull when wearing 3d glasses but Can be used
-</p>
 
-```java
-BufferedImage grayFilter = ColorFilter.filterGrayscale(img);
-```
+<table>
+<tr>
+<th>Default</th>
+<th>Indexed</th>
+<th>Gray</th>
+<th>Binary</th>
+</tr>
+<tr>
+<td>
+<img src="https://i.imgur.com/ZcNK1s2.jpg">
+</td>
+<td>
+<img src="https://i.imgur.com/dBI2ZFI.png">
+</td>
+<td>
+<img src="https://i.imgur.com/C6A2pMO.jpg">
+</td>
+<td>
+<img src="https://i.imgur.com/FyijEmt.png">
+</td>
+</tr>
+
+<tr>
+<th>Green</th>
+<th>Blue</th>
+<th>Transparent (0.5)</th>
+<th>Invert</th>
+</tr>
+<tr>
+<td>
+<img src="https://i.imgur.com/3HPSel1.png">
+</td>
+<td>
+<img src="https://i.imgur.com/lXIyDEm.jpg">
+</td>
+<td>
+<img src="https://i.imgur.com/zMNBL6G.jpg">
+</td>
+<td>
+<img src="https://i.imgur.com/RXWopYs.jpg">
+</td>
+</tr>
+</table>
