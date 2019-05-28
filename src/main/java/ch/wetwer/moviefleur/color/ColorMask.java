@@ -1,4 +1,4 @@
-package ch.wetwer.moviefleur.helper;
+package ch.wetwer.moviefleur.color;
 
 /**
  * @author Wetwer

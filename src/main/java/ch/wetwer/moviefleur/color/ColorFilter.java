@@ -1,4 +1,4 @@
-package ch.wetwer.moviefleur.helper;
+package ch.wetwer.moviefleur.color;
 
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
