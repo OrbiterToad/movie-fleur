@@ -49,7 +49,6 @@ public class VideoExtractor {
             frameGrabber.start();
 
             ArrayList<BufferedImage> extractedFrames = new ArrayList<>();
-            //frameGrabber.getFrameNumber()
             for (int frame = 1; frame <= frameGrabber.getFrameNumber(); frame = frame + 1) {
                 System.out.println(frame);
                 frameGrabber.setFrameNumber(frame);
@@ -63,13 +62,19 @@ public class VideoExtractor {
         return null;
     }
 
+    /**
+     * @param file  video file to extract 3d frames
+     * @param start frame where to start the extraction
+     * @param end   frame to stop with the extraction
+     *
+     * @return list of frames in specified range
+     */
     public List<BufferedImage> extractAll(File file, int start, int end) {
         try {
             FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(file);
             frameGrabber.start();
 
             ArrayList<BufferedImage> extractedFrames = new ArrayList<>();
-            //frameGrabber.getFrameNumber()
             for (int frame = start; frame <= end; frame = frame + 1) {
                 System.out.println(frame);
                 frameGrabber.setFrameNumber(frame);

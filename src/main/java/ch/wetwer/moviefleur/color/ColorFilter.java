@@ -36,19 +36,23 @@ public class ColorFilter {
 
         for (int pixelX = 0; pixelX < originalImg.getWidth(); pixelX++) {
             for (int pixelY = 0; pixelY < originalImg.getHeight(); pixelY++) {
-                int pixel = originalImg.getRGB(pixelX, pixelY) & colorMask.getMask();
-                colorImage.setRGB(pixelX, pixelY, pixel);
+                colorImage.setRGB(pixelX, pixelY,
+                        originalImg.getRGB(pixelX, pixelY) & colorMask.getMask());
             }
         }
 
         return colorImage;
     }
 
+    /**
+     * @param image image to be inverted
+     *
+     * @return an inverted image where all rgb values are flipped
+     */
     public static BufferedImage invert(BufferedImage image) {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
-                int rgba = image.getRGB(x, y);
-                Color col = new Color(rgba, true);
+                Color col = new Color(image.getRGB(x, y), true);
                 col = new Color(255 - col.getRed(),
                         255 - col.getGreen(),
                         255 - col.getBlue());
