@@ -19,9 +19,11 @@ public class ImageSplitter {
      * @return list with leftFrame at [0] and rightFrame at [1]
      */
     public static List<BufferedImage> split(BufferedImage frameDefault) {
-        BufferedImage splitLeft = stretch(frameDefault.getSubimage(0, 0,
+        BufferedImage splitLeft = stretch(crop(frameDefault,
                 frameDefault.getWidth() / 2, frameDefault.getHeight()));
-        BufferedImage splitRight = stretch(frameDefault.getSubimage(frameDefault.getWidth() / 2, 0,
+
+        BufferedImage splitRight = stretch(crop(frameDefault,
+                frameDefault.getWidth() / 2, 0,
                 frameDefault.getWidth() / 2, frameDefault.getHeight()));
 
         return Arrays.asList(splitLeft, splitRight);
@@ -34,11 +36,45 @@ public class ImageSplitter {
      * @return stretched Img
      */
     public static BufferedImage stretch(BufferedImage halfImg) {
-        Image preloadImage = halfImg.getScaledInstance(halfImg.getWidth() * 2, halfImg.getHeight(), Image.SCALE_FAST);
-        BufferedImage stretchedImg = new BufferedImage(
-                preloadImage.getWidth(null), preloadImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        stretchedImg.getGraphics().drawImage(preloadImage, 0, 0, null);
-        return stretchedImg;
+        return resize(halfImg, halfImg.getWidth() * 2, halfImg.getHeight());
     }
 
+    /**
+     * @param image  image to be resized
+     * @param width  width to be applied
+     * @param height height to be applied
+     *
+     * @return resized image according to width and height
+     */
+    public static BufferedImage resize(BufferedImage image, int width, int height) {
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        resizedImage.getGraphics().drawImage(
+                image.getScaledInstance(width, height, Image.SCALE_FAST), 0, 0, null);
+
+        return resizedImage;
+    }
+
+    /**
+     * @param image  image to be cropped
+     * @param width  width of crop field (cant be out of bounds)
+     * @param height height of crop field (cant be out of bounds)
+     *
+     * @return cropped image according to crop field
+     */
+    public static BufferedImage crop(BufferedImage image, int width, int height) {
+        return image.getSubimage(0, 0, width, height);
+    }
+
+    /**
+     * @param image   image to be cropped
+     * @param offsetX offset x on the image
+     * @param offsetY offset y on the image
+     * @param width   width of crop field (cant be out of bounds)
+     * @param height  height of crop field (cant be out of bounds)
+     *
+     * @return cropped image according to crop field and offset point
+     */
+    public static BufferedImage crop(BufferedImage image, int offsetX, int offsetY, int width, int height) {
+        return image.getSubimage(offsetX, offsetY, width, height);
+    }
 }
