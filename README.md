@@ -7,13 +7,12 @@ Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red
 ### Convert from video file with given framePosition
 If a 3D video is available the frames can be extracted from the Video by applying the frame Position. 3D video Files can be found here: <a href="https://yts.am/browse-movies/0/3D/all/0/downloads">YTS</a>
 ```java
-VideoBuilder videoBuilder = VideoBuilder.builder().inputFile("3dVideo.mp4").build();
+BufferedImage frame = FleurVideo.extract(new File("3dVideo.mp4"), 6000);
 
-BufferedImage frame = new VideoConverter(videoBuilder).getFrame(6000);
-List<BufferedImage> splited = ImageSplitter.split(frame);
-BufferedImage frameCombined = AdditiveCombiner.combine(
-        ColorFilter.colorMask(splited.get(0), FilterColor.RED),
-        ColorFilter.colorMask(splited.get(1), FilterColor.GREEN_BLUE));
+List<BufferedImage> splited = Fleur3dUtil.split(frame);
+BufferedImage frameCombined = FleurFilter.additive(
+        FleurFilter.color(splited.get(0), ColorMask.RED),
+        FleurFilter.color(splited.get(1), ColorMask.GREEN_BLUE));
 
 ImageHelper.saveImage(frameCombined, "frame_combined.png");
 ```
@@ -23,9 +22,7 @@ ImageHelper.saveImage(frameCombined, "frame_combined.png");
 <img src="https://mask.imgur.com/ODNFPZ6.jpg" width="50%">
 
 ```java
-VideoBuilder videoBuilder = VideoBuilder.builder().inputFile("3dVideo.mp4").build();
-
-BufferedImage frame = new VideoConverter(videoBuilder).getFrame(6000);
+FleurVideo.extract(new File("3dVideo.mp4"), 6000);
 ```
 
 
@@ -50,14 +47,14 @@ BufferedImage frame = new VideoConverter(videoBuilder).getFrame(6000);
 </table>
 
 ```java
-List<BufferedImage> splited = ImageSplitter.split(frame);
+List<BufferedImage> splited = Fleur3dUtil.split(frame);
 ```
 
 #### 3. Combine Frames to one image (No color filtering)
 <img src="https://mask.imgur.com/lFv7n8y.jpg" width="50%">
 
 ```java
-BufferedImage combined = AlphaCombiner.combine(frame);
+BufferedImage combined = FleurFilter.alphaCombine(frame1, frame2);
 ```
 
 #### 4. Apply color filter
@@ -89,8 +86,8 @@ BufferedImage combined = AlphaCombiner.combine(frame);
 </table>
 
 ```java
-BufferedImage redFilterImg = ColorFilter.colorMask(splited.get(0), FilterColor.RED);
-BufferedImage greenBlueFilterImg = ColorFilter.colorMask(splited.get(1), FilterColor.GREEN_BLUE);
+BufferedImage redFilterImg = FleurFilter.color(splited.get(0), FilterColor.RED);
+BufferedImage greenBlueFilterImg = FleurFilter.color(splited.get(1), FilterColor.GREEN_BLUE);
 ```
 
 
@@ -101,9 +98,9 @@ BufferedImage greenBlueFilterImg = ColorFilter.colorMask(splited.get(1), FilterC
 </p>
 
 ```java
-BufferedImage additiveCombinedFrame = AdditiveCombiner.combine(
-        ColorFilter.colorMask(splited.get(0), FilterColor.RED),
-        ColorFilter.colorMask(splited.get(1), FilterColor.GREEN_BLUE)
+BufferedImage additiveCombinedFrame = FleurFilter.additive(
+        FleurFilter.color(splited.get(0), FilterColor.RED),
+        FleurFilter.color(splited.get(1), FilterColor.GREEN_BLUE)
 );
 ```
 
@@ -112,22 +109,20 @@ BufferedImage additiveCombinedFrame = AdditiveCombiner.combine(
 
 ```java
 // Extract images from Video (specific from frames 6000 - 6200)
-List<BufferedImage> frames = new VideoExtractor()
-        .extractAll(new File("3dVideo.mp4"), 6000, 6200);
-        
-List<BufferedImage> videoImages = new ArrayList<>();
+List<BufferedImage> images
+        = FleurVideo.extract(new File("3dVideo.mp4"), 6000, 6010);
 
-// For every extracted img apply filters
-for (BufferedImage frame : frames) {
-        List<BufferedImage> splits = ImageSplitter.split(frame);
-        videoImages.add(AdditiveCombiner.combine(
-            ColorFilter.filterColor(splits.get(0), ColorMask.RED),
-            ColorFilter.filterColor(splits.get(1), ColorMask.GREEN_BLUE)
-      ));
+List<BufferedImage> videoImages = new ArrayList<>();
+for (BufferedImage image : images) {
+    List<BufferedImage> splits = Fleur3dUtil.split(image);
+
+    videoImages.add(FleurFilter.additive(
+            FleurFilter.color(splits.get(0), ColorMask.RED),
+            FleurFilter.color(splits.get(1), ColorMask.GREEN_BLUE)
+    ));
 }
 
-// Create Video from filtered frames
-new VideoCompiler().create(videoImages, "3dVideo.mp4");
+FleurVideo.create(videoImages, "3dVideoOut.mp4");
 ```
 
 #### Further Filters
@@ -158,7 +153,7 @@ ImageHelper.convertToType(frame, BufferedImage.TYPE_BYTE_INDEXED)
             </td>
             <td>
                <pre>
-ColorFilter.filterColor(frame, ColorMask.GREEN)
+FleurFilter.color(frame, ColorMask.GREEN)
                </pre>
             </td>
         </tr>
@@ -169,7 +164,7 @@ ColorFilter.filterColor(frame, ColorMask.GREEN)
             </td>
             <td>
                <pre>
-ColorFilter.filterColor(frame, ColorMask.GREEN)
+FleurFilter.color(frame, ColorMask.GREEN)
                </pre>
             </td>
         </tr>
@@ -180,7 +175,7 @@ ColorFilter.filterColor(frame, ColorMask.GREEN)
             </td>
             <td>
                <pre>
-ColorFilter.filterColor(frame, ColorMask.BLUE)
+FleurFilter.color(frame, ColorMask.BLUE)
                </pre>
             </td>
         </tr>
@@ -191,7 +186,7 @@ ColorFilter.filterColor(frame, ColorMask.BLUE)
             </td>
             <td>
                <pre>
-ColorFilter.filterColor(frame, ColorMask.BLUE)
+FleurFilter.color(frame, ColorMask.BLUE)
                </pre>
             </td>
         </tr>
@@ -202,7 +197,7 @@ ColorFilter.filterColor(frame, ColorMask.BLUE)
             </td>
             <td>
                <pre>
-ColorFilter.filterGrayscale(frame)
+FleurFilter.gray(frame)
                </pre>
             </td>
         </tr>
@@ -224,7 +219,7 @@ ImageHelper.convertToType(frame, BufferedImage.TYPE_BYTE_BINARY)
             </td>
             <td>
                <pre>
-AlphaCombiner.transparent(frame, 0.5)
+FleurFilter.transparent(frame, 0.5)
                </pre>
             </td>
         </tr>
@@ -235,7 +230,7 @@ AlphaCombiner.transparent(frame, 0.5)
             </td>
             <td>
                <pre>
-ColorFilter.invert(frame)
+FleurFilter.invert(frame)
                </pre>
             </td>
         </tr>
