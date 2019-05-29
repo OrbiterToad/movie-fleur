@@ -1,4 +1,4 @@
-package ch.wetwer.moviefleur.helper;
+package ch.wetwer.moviefleur;
 
 import org.junit.Test;
 
@@ -7,33 +7,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ImageSplitterTest {
-
-    @Test
-    public void testSplit() throws Exception {
-        // Setup
-        final BufferedImage frameDefault = ImageIO.read(new File("img/frame_default.png"));
-
-        // Run the test
-        final List<BufferedImage> result = ImageSplitter.split(frameDefault);
-
-        // Verify the results
-        assertEquals(frameDefault.getWidth() * 2, result.get(0).getWidth() + result.get(1).getWidth());
-    }
-
-    @Test(expected = IOException.class)
-    public void testSplit_ThrowsIOException() throws Exception {
-        // Setup
-        final BufferedImage frameDefault = ImageIO.read(new File("test/test.png"));
-
-        // Run the test
-        ImageSplitter.split(frameDefault);
-    }
-
+public class FleurUtilTest {
     @Test
     public void testResize() throws IOException {
         // Setup
@@ -42,7 +19,7 @@ public class ImageSplitterTest {
         final int height = 300;
 
         // Run the test
-        final BufferedImage result = ImageSplitter.resize(image, width, height);
+        final BufferedImage result = FleurUtil.resize(image, width, height);
 
         // Verify the results
         assertEquals(width, result.getWidth());
@@ -57,7 +34,7 @@ public class ImageSplitterTest {
         final int height = 300;
 
         // Run the test
-        final BufferedImage result = ImageSplitter.crop(image, width, height);
+        final BufferedImage result = FleurUtil.crop(image, width, height);
 
         // Verify the results
         assertEquals(width, result.getWidth());
@@ -72,7 +49,7 @@ public class ImageSplitterTest {
         final int height = 2000;
 
         // Run the test
-        ImageSplitter.crop(image, width, height);
+        FleurUtil.crop(image, width, height);
     }
 
     @Test
@@ -85,7 +62,7 @@ public class ImageSplitterTest {
         final int offsetY = 20;
 
         // Run the test
-        final BufferedImage result = ImageSplitter.crop(image, offsetX, offsetY, width, height);
+        final BufferedImage result = FleurUtil.crop(image, offsetX, offsetY, width, height);
 
         // Verify the results
         assertEquals(width, result.getWidth());
@@ -102,7 +79,7 @@ public class ImageSplitterTest {
         final int offsetY = 20;
 
         // Run the test
-        ImageSplitter.crop(image, offsetX, offsetY, width, height);
+        FleurUtil.crop(image, offsetX, offsetY, width, height);
     }
 
 }

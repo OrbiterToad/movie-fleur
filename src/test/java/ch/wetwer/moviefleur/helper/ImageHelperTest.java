@@ -61,12 +61,14 @@ public class ImageHelperTest {
     public void testConvertToType() throws IOException {
         // Setup
         final BufferedImage sourceImage = ImageIO.read(new File("img/frame_default.png"));
-        final int type = BufferedImage.TYPE_3BYTE_BGR;
+        final int type = BufferedImage.TYPE_INT_RGB;
 
         // Run the test
+        final BufferedImage result2 = ImageHelper.convertToType(sourceImage, sourceImage.getType());
         final BufferedImage result = ImageHelper.convertToType(sourceImage, type);
 
         // Verify the results
         assertEquals(type, result.getType());
+        assertEquals(5, result2.getType());
     }
 }
