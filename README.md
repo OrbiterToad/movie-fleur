@@ -153,7 +153,7 @@ ImageHelper.convertToType(frame, BufferedImage.TYPE_BYTE_INDEXED)
             </td>
             <td>
                <pre>
-FleurFilter.color(frame, ColorMask.GREEN)
+FleurFilter.color(frame, ColorMask.RED)
                </pre>
             </td>
         </tr>
