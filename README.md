@@ -186,7 +186,7 @@ FleurFilter.color(frame, ColorMask.BLUE)
             </td>
             <td>
                <pre>
-FleurFilter.color(frame, ColorMask.BLUE)
+FleurFilter.color(frame, ColorMask.GREEN_BLUE)
                </pre>
             </td>
         </tr>
