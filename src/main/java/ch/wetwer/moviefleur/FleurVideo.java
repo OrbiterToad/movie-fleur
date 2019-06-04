@@ -12,6 +12,13 @@ import java.util.List;
  * @project movie-fleur
  * @package ch.wetwer.moviefleur
  * @created 29.05.2019
+ *
+ * Interface for Video actions
+ * Contents:
+ * - Extract single Frames from Video
+ * - Extract all Frames from Video
+ * - Extract specific Frames form Video
+ * - Create Video from Frame Array
  **/
 public class FleurVideo {
 

@@ -10,6 +10,11 @@ import java.util.List;
  * @project movie-fleur
  * @package ch.wetwer.moviefleur
  * @created 29.05.2019
+ *
+ * Interface for actions used with the default 3d actions
+ * Contents:
+ * - Split Image 50/50 on X axis
+ * - Stretch Image by 200%
  **/
 public class Fleur3dUtil {
 

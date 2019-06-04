@@ -12,6 +12,15 @@ import java.awt.image.BufferedImage;
  * @project movie-fleur
  * @package ch.wetwer.moviefleur
  * @created 29.05.2019
+ *
+ * Interface for actions to filter Images
+ * Contents:
+ * - Additive Image combining
+ * - Alpha image Combining
+ * - Color filtering on images
+ * - Grayscaling on images
+ * - Inverting Image colors
+ * - Create transparency on images
  **/
 public class FleurFilter {
 
