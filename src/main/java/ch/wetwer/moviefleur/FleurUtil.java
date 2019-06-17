@@ -27,6 +27,10 @@ public class FleurUtil {
         return ImageSplitter.resize(image, width, height);
     }
 
+    public static BufferedImage scale(BufferedImage image, double scale) {
+        return ImageSplitter.scale(image, scale);
+    }
+
     public static BufferedImage crop(BufferedImage image, int width, int height) {
         return ImageSplitter.crop(image, width, height);
     }
@@ -41,6 +45,14 @@ public class FleurUtil {
 
     public static BufferedImage read(String imagePath) throws IOException {
         return ImageIO.read(new File(imagePath));
+    }
+
+    public static void save(BufferedImage image, String file) throws IOException {
+        ImageHelper.saveImage(image, file);
+    }
+
+    public static void save(BufferedImage image, File file) throws IOException {
+        ImageHelper.saveImage(image, file);
     }
 
     public static BufferedImage toType(BufferedImage image, int type) {

@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Wetwer
@@ -31,7 +32,6 @@ public class ImageHelper {
      *
      * @return BufferedImage object as reference
      *
-     * @throws IOException
      */
     public static BufferedImage saveImage(BufferedImage bufferedImage, File outFile) throws IOException {
         ImageIO.write(bufferedImage, "png", outFile);

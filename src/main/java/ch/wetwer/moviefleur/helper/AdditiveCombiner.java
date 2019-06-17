@@ -40,9 +40,9 @@ public class AdditiveCombiner {
         Color left = new Color(pixelLeft);
         Color right = new Color(pixelRight);
 
-        int rgb = left.getRed();
-        rgb = (rgb << 8) + right.getGreen();
-        rgb = (rgb << 8) + right.getBlue();
+        int rgb = right.getRed() + left.getRed();
+        rgb = (rgb << 8) + right.getGreen() + left.getGreen();
+        rgb = (rgb << 8) + right.getBlue() + left.getBlue();
 
         return rgb;
     }

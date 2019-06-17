@@ -77,4 +77,16 @@ public class ImageSplitter {
     public static BufferedImage crop(BufferedImage image, int offsetX, int offsetY, int width, int height) {
         return image.getSubimage(offsetX, offsetY, width, height);
     }
+
+    public static BufferedImage scale(BufferedImage image, double scaleAmount) {
+        BufferedImage resizedImage = new BufferedImage(
+                (int) (image.getWidth() / scaleAmount), (int) (image.getHeight() / scaleAmount),
+                BufferedImage.TYPE_INT_ARGB);
+        resizedImage.getGraphics().drawImage(
+                image.getScaledInstance(
+                        (int) (image.getWidth() / scaleAmount), (int) (image.getHeight() / scaleAmount),
+                        Image.SCALE_FAST), 0, 0, null);
+
+        return resizedImage;
+    }
 }
