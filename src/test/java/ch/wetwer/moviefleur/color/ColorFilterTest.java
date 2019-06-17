@@ -33,13 +33,17 @@ public class ColorFilterTest {
         final BufferedImage resultRed = ColorFilter.filterColor(originalImg, ColorMask.RED);
         final BufferedImage resultGreen = ColorFilter.filterColor(originalImg, ColorMask.GREEN);
         final BufferedImage resultBlue = ColorFilter.filterColor(originalImg, ColorMask.BLUE);
-        final BufferedImage resultGreenBlue = ColorFilter.filterColor(originalImg, ColorMask.GREEN_BLUE);
+        final BufferedImage resultYellow = ColorFilter.filterColor(originalImg, ColorMask.YELLOW);
+        final BufferedImage resultCyan = ColorFilter.filterColor(originalImg, ColorMask.CYAN);
+        final BufferedImage resultMagenta = ColorFilter.filterColor(originalImg, ColorMask.MAGENTA);
 
         // Verify the results
         assertEquals(-16056320, resultRed.getRGB(1, 1));
         assertEquals(-16774912, resultGreen.getRGB(1, 1));
         assertEquals(-16777211, resultBlue.getRGB(1, 1));
-        assertEquals(-16774907, resultGreenBlue.getRGB(1, 1));
+        assertEquals(-16054016, resultYellow.getRGB(1, 1));
+        assertEquals(-16774907, resultCyan.getRGB(1, 1));
+        assertEquals(-16056315, resultMagenta.getRGB(1, 1));
     }
 
     @Test

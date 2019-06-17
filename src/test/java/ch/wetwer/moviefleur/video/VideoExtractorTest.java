@@ -38,8 +38,10 @@ public class VideoExtractorTest {
 
         // Run the test
         final List<BufferedImage> result = videoExtractorUnderTest.extractAll(file, 1, 10);
+        final List<BufferedImage> resultShoved = videoExtractorUnderTest.extractAll(file, 10, 20);
 
         // Verify the results
         assertEquals(10, result.size());
+        assertEquals(11, resultShoved.size());
     }
 }

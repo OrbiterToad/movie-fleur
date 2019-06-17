@@ -23,14 +23,11 @@ public class FleurFilterTest {
 
         List<BufferedImage> splits = ImageSplitter.split(originalImg);
 
-        final BufferedImage imgFrameLeft = splits.get(0);
-        final BufferedImage imgFrameRight = splits.get(1);
-
         // Run the test
-        final BufferedImage result = FleurFilter.additive(imgFrameLeft, imgFrameRight);
+        final BufferedImage result = FleurFilter.additive(splits.get(0), splits.get(1));
 
         // Verify the results
-        TestCase.assertEquals(imgFrameLeft.getWidth(), result.getWidth());
+        TestCase.assertEquals(splits.get(0).getWidth(), result.getWidth());
     }
 
     @Test
@@ -39,10 +36,7 @@ public class FleurFilterTest {
 
         List<BufferedImage> splits = ImageSplitter.split(originalImg);
 
-        final BufferedImage imgFrameLeft = splits.get(0);
-        final BufferedImage imgFrameRight = splits.get(1);
-
-        FleurFilter.alphaCombine(imgFrameLeft, imgFrameRight);
+        FleurFilter.alphaCombine(splits.get(0), splits.get(1));
     }
 
     @Test
@@ -54,13 +48,17 @@ public class FleurFilterTest {
         final BufferedImage resultRed = FleurFilter.color(originalImg, ColorMask.RED);
         final BufferedImage resultGreen = FleurFilter.color(originalImg, ColorMask.GREEN);
         final BufferedImage resultBlue = FleurFilter.color(originalImg, ColorMask.BLUE);
-        final BufferedImage resultGreenBlue = FleurFilter.color(originalImg, ColorMask.GREEN_BLUE);
+        final BufferedImage resultYellow = FleurFilter.color(originalImg, ColorMask.YELLOW);
+        final BufferedImage resultCyan = FleurFilter.color(originalImg, ColorMask.CYAN);
+        final BufferedImage resultMagenta = FleurFilter.color(originalImg, ColorMask.MAGENTA);
 
         // Verify the results
         assertEquals(-16056320, resultRed.getRGB(1, 1));
         assertEquals(-16774912, resultGreen.getRGB(1, 1));
         assertEquals(-16777211, resultBlue.getRGB(1, 1));
-        assertEquals(-16774907, resultGreenBlue.getRGB(1, 1));
+        assertEquals(-16054016, resultYellow.getRGB(1, 1));
+        assertEquals(-16774907, resultCyan.getRGB(1, 1));
+        assertEquals(-16056315, resultMagenta.getRGB(1, 1));
     }
 
     @Test

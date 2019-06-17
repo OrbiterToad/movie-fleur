@@ -45,13 +45,21 @@ public class AlphaCombinerTest {
         // Setup
         final BufferedImage bufferedImg = ImageIO.read(new File("img/frame_default.png"));
         final double alpha = 0.5d;
+        final double alphaNone = 0d;
+        final double alphaFull = 1d;
 
         // Run the test
         final BufferedImage result = AlphaCombiner.transparent(bufferedImg, alpha);
+        final BufferedImage resultNone = AlphaCombiner.transparent(bufferedImg, alphaNone);
+        final BufferedImage resultFull = AlphaCombiner.transparent(bufferedImg, alphaFull);
 
         // Verify the results
-        Color c = new Color(result.getRGB(1, 1), true);
+        Color color = new Color(result.getRGB(1, 1), true);
+        Color colorNone = new Color(resultNone.getRGB(1, 1), true);
+        Color colorFull = new Color(resultFull.getRGB(1, 1), true);
 
-        assertEquals(128, c.getAlpha());
+        assertEquals(128, color.getAlpha());
+        assertEquals(0, colorNone.getAlpha());
+        assertEquals(255, colorFull.getAlpha());
     }
 }
