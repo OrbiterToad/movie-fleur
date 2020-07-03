@@ -226,13 +226,13 @@ FleurFilter.color(frame, ColorMask.BLUE)
             </td>
         </tr>
         <tr>
-            <th>Green & Blue</th>
+            <th>Cyan</th>
             <td>
                 <img src="https://i.imgur.com/hNGX1do.jpg" width="500px">
             </td>
             <td>
                <pre>
-FleurFilter.color(frame, ColorMask.GREEN_BLUE)
+FleurFilter.color(frame, ColorMask.CYAN)
                </pre>
             </td>
         </tr>
