@@ -125,7 +125,8 @@ for (BufferedImage image : images) {
 FleurVideo.create(videoImages, "3dVideoOut.mp4");
 ```
 
-### 7. Compile to Polaroid 3d Video (left/right)
+### 7. Compile to polarized 3d Video (left/right)
+
 <img src="https://github.com/Wetwer/movie-fleur/blob/master/demo/gif_left.gif?raw=true" width="50%">
 <img src="https://github.com/Wetwer/movie-fleur/blob/master/demo/gif_right.gif?raw=true" width="50%">
 
@@ -145,6 +146,12 @@ FleurVideo.create(leftArray, "left.mp4");
 FleurVideo.create(rightArray, "right.mp4");
 ```
 
+To use: play both videos at the same frames but on two diffrent beamers.... I dont have two beamers... well. I havent tested this  acctually
+<br>
+<img src="https://www.thorlabs.com/images/TabImages/3D_Cinema_A1-800.jpg">
+<br>
+Or use active shutter 3d glasses requires 60hz monitor and switching on each frame to the other video... 
+<a href="https://en.wikipedia.org/wiki/Active_shutter_3D_system">Active_shutter_3D_system</a>
 #### Further Filters
 
   <table>
