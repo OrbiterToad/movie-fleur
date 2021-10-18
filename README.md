@@ -5,7 +5,7 @@
 Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red (Blue/Cyan/Green) Glasses
 
 ### Convert from video file with given framePosition
-If a 3D video is available the frames can be extracted from the Video by applying the frame Position. 3D video Files can be found here: <a href="https://yts.am/browse-movies/0/3D/all/0/downloads">YTS</a>
+If a 3D video is available the frames can be extracted from the Video by applying the frame Position. 3D video Files can be found here: <a href="https://yts.mx/browse-movies/0/3D/all/0/latest/0/all">YTS</a>
 ```java
 BufferedImage frame = FleurVideo.extract(new File("3dVideo.mp4"), 6000);
 
