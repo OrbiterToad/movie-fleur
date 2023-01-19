@@ -6,6 +6,7 @@ Convert 3D movies with splited Frames to Anaglyph 3D movies to watch with 3d Red
 
 ### Convert from video file with given framePosition
 If a 3D video is available the frames can be extracted from the Video by applying the frame Position. 3D video Files can be found here: <a href="https://yts.mx/browse-movies/0/3D/all/0/latest/0/all">YTS</a>
+
 ```java
 BufferedImage frame = FleurVideo.extract(new File("3dVideo.mp4"), 6000);
 
@@ -16,7 +17,6 @@ BufferedImage frameCombined = FleurFilter.additive(
 
 ImageHelper.saveImage(frameCombined, "frame_combined.png");
 ```
-
 
 #### 1. Extract frames from video file
 <img src="https://mask.imgur.com/ODNFPZ6.jpg" width="50%">
@@ -46,18 +46,24 @@ FleurVideo.extract(new File("3dVideo.mp4"), 6000);
     </tr>
 </table>
 
+
 ```java
 List<BufferedImage> splited = Fleur3dUtil.split(frame);
 ```
 
+
 #### 3. Combine Frames to one image (No color filtering)
+
 <img src="https://mask.imgur.com/lFv7n8y.jpg" width="50%">
+
 
 ```java
 BufferedImage combined = FleurFilter.alphaCombine(frame1, frame2);
 ```
 
+
 #### 4. Apply color filter
+
 <table>
     <tr>
         <th>
@@ -85,6 +91,7 @@ BufferedImage combined = FleurFilter.alphaCombine(frame1, frame2);
     </tr>
 </table>
 
+
 ```java
 BufferedImage redFilterImg = FleurFilter.color(splited.get(0), FilterColor.RED);
 BufferedImage greenBlueFilterImg = FleurFilter.color(splited.get(1), FilterColor.CYAN);
@@ -92,10 +99,10 @@ BufferedImage greenBlueFilterImg = FleurFilter.color(splited.get(1), FilterColor
 
 
 #### 5. Combined with filter
+
 <img src="https://i.imgur.com/hgqPHa2.jpg" width="50%">
-<p>
-    Additive Color filtering => For every Pixel on final Image RGB(LeftImage.red, RightImage.green, RightImage.blue)
-</p>
+
+Additive Color filtering => For every Pixel on final Image RGB(LeftImage.red, RightImage.green, RightImage.blue)
 
 ```java
 BufferedImage additiveCombinedFrame = FleurFilter.additive(
@@ -105,7 +112,9 @@ BufferedImage additiveCombinedFrame = FleurFilter.additive(
 ```
 
 ### 6. Compile to Video
+
 <img src="https://github.com/Wetwer/movie-fleur/blob/master/demo/gif_default.gif?raw=true" width="50%">
+
 
 ```java
 // Extract images from Video (specific from frames 6000 - 6200)
@@ -125,10 +134,12 @@ for (BufferedImage image : images) {
 FleurVideo.create(videoImages, "3dVideoOut.mp4");
 ```
 
+
 ### 7. Compile to polarized 3d Video (left/right)
 
 <img src="https://github.com/Wetwer/movie-fleur/blob/master/demo/gif_left.gif?raw=true" width="50%">
 <img src="https://github.com/Wetwer/movie-fleur/blob/master/demo/gif_right.gif?raw=true" width="50%">
+
 
 ```java
 List<BufferedImage> images = FleurVideo.extract(new File("3dVideo.mp4"), 6000, 6100);
@@ -145,6 +156,7 @@ for (BufferedImage image : images) {
 FleurVideo.create(leftArray, "left.mp4");
 FleurVideo.create(rightArray, "right.mp4");
 ```
+
 
 To use: play both videos at the same frames but on two diffrent beamers.... I dont have two beamers... well. I havent tested this  acctually
 <br>
